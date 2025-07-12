@@ -35,7 +35,7 @@ export const useDraft = (): DraftContextType => {
   const skipPick = useCallback(() => {
     setCurrentPick(prev => prev + 1);
     setTimeLeft(DRAFT_DURATION);
-    toast.info('Pick skipped');
+    toast('Pick skipped', 'info');
   }, [toast]);
 
   // Timer effect
@@ -77,14 +77,14 @@ export const useDraft = (): DraftContextType => {
     },
     onError: (error) => {
       console.error('Error selecting player:', error);
-      toast.error('Failed to select player');
+      toast('Failed to select player', 'error');
     },
   });
 
   // Toggle pause state
   const togglePause = useCallback(() => {
     setIsPaused(prev => !prev);
-    toast(isPaused ? 'Draft resumed' : 'Draft paused');
+    toast(isPaused ? 'Draft resumed' : 'Draft paused', 'info');
   }, [isPaused, toast]);
 
   // Reset the draft
@@ -98,10 +98,10 @@ export const useDraft = (): DraftContextType => {
       setCurrentPick(1);
       setTimeLeft(DRAFT_DURATION);
       setIsPaused(false);
-      toast.success('Draft reset successfully');
+      toast('Draft reset successfully', 'success');
     } catch (error) {
       console.error('Error resetting draft:', error);
-      toast.error('Failed to reset draft');
+      toast('Failed to reset draft', 'error');
     }
   }, [queryClient, toast]);
 
