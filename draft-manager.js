@@ -22,18 +22,160 @@ let isPaused = false;
 let draftOrder = config.teams; // For snake: reverse even rounds
 let playerPool = [];
 
-// Load player pool
+// Load player pool from Supabase
 async function loadPlayerPool() {
-  const response = await fetch(config.playerPoolFile);
-  playerPool = await response.json(); // Assume array of strings
-  const datalist = document.getElementById('player-datalist');
-  playerPool.forEach(player => {
-    const option = document.createElement('option');
-    option.value = player;
-    datalist.appendChild(option);
-  });
+  try {
+    console.log('Loading players from Supabase...');
+    
+    // Fetch players from Supabase
+    const { data: players, error } = await supabase
+      .from('players')  // Make sure this matches your Supabase table name
+      .select('name')   // Assuming 'name' is the column with player names
+      .order('name');   // Optional: order players alphabetically
+
+    if (error) {
+      console.error('Error fetching players from Supabase:', error);
+      throw error;
+    }
+
+    if (!players || players.length === 0) {
+      console.warn('No players found in Supabase');
+      playerPool = [];
+    } else {
+      // Extract player names from the Supabase response
+      playerPool = players.map(player => player.name);
+      console.log(`Loaded ${playerPool.length} players from Supabase`);
+    }
+    
+    // If we still don't have players, use a default list as fallback
+    if (!playerPool || playerPool.length === 0) {
+      console.warn('Using default player list as fallback');
+      playerPool = [
+        'Player 1', 'Player 2', 'Player 3', 'Player 4', 'Player 5',
+        'Player 6', 'Player 7', 'Player 8', 'Player 9', 'Player 10'
+      ];
+    }
+    
+    // Populate the datalist
+    const datalist = document.getElementById('player-datalist');
+    if (datalist) {
+      // Clear existing options
+      datalist.innerHTML = '';
+      
+      // Add new options
+      playerPool.forEach(player => {
+        if (player && player.trim() !== '') {
+          const option = document.createElement('option');
+          option.value = player;
+          datalist.appendChild(option);
+        }
+      });
+      
+      console.log(`Populated dropdown with ${playerPool.length} players`);
+    } else {
+      console.error('Could not find player-datalist element');
+    }
+  } catch (error) {
+    console.error('Error loading player pool:', error);
+  }
 }
-loadPlayerPool();
+
+// Call loadPlayerPool when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize the player pool
+  loadPlayerPool();
+  
+  // Set up player input field
+  const playerInput = document.getElementById('player-input');
+  if (playerInput) {
+    // Enable/disable submit button based on input
+    playerInput.addEventListener('input', (e) => {
+      const submitButton = document.getElementById('submit-pick');
+      if (submitButton) {
+        submitButton.disabled = !e.target.value.trim();
+      }
+    });
+    
+    // Auto-focus the input field when the page loads
+    playerInput.focus();
+  }
+  
+  // Set up submit button handler
+  const submitButton = document.getElementById('submit-pick');
+  if (submitButton) {
+    submitButton.addEventListener('click', async () => {
+      const playerName = playerInput.value.trim();
+      if (playerName) {
+        await handlePlayerSelection(playerName);
+        playerInput.value = ''; // Clear the input
+        submitButton.disabled = true;
+      }
+    });
+  }
+  
+  // Allow pressing Enter to submit
+  if (playerInput) {
+    playerInput.addEventListener('keypress', async (e) => {
+      if (e.key === 'Enter' && playerInput.value.trim()) {
+        const playerName = playerInput.value.trim();
+        await handlePlayerSelection(playerName);
+        playerInput.value = ''; // Clear the input
+        const submitButton = document.getElementById('submit-pick');
+        if (submitButton) submitButton.disabled = true;
+      }
+    });
+  }
+});
+
+// Handle player selection
+async function handlePlayerSelection(playerName) {
+  if (!playerName) return;
+  
+  try {
+    // Here you would typically record the pick in your Supabase database
+    // For example:
+    /*
+    const { data, error } = await supabase
+      .from('draft_picks')
+      .insert([
+        { 
+          pick_number: currentPick,
+          player_name: playerName,
+          team_name: getCurrentTeam(),
+          timestamp: new Date().toISOString()
+        }
+      ]);
+    
+    if (error) throw error;
+    */
+    
+    console.log(`Selected player: ${playerName}`);
+    showToast(`Selected: ${playerName}`);
+    
+    // Move to next pick
+    currentPick++;
+    updateDraftBoard();
+    
+  } catch (error) {
+    console.error('Error recording pick:', error);
+    showToast('Error recording pick. Check console for details.', true);
+  }
+}
+
+// Helper function to show toast messages
+function showToast(message, isError = false) {
+  const toast = document.getElementById('toast');
+  if (toast) {
+    toast.textContent = message;
+    toast.style.display = 'block';
+    toast.style.backgroundColor = isError ? '#dc3545' : '#28a745';
+    
+    // Hide after 3 seconds
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 3000);
+  }
+}
 
 // Real-time subscription
 const channel = supabase.channel('draft-updates');
