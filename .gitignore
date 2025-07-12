@@ -3,3 +3,4 @@ logos/.DS_Store
 .env
 .env.template
 dockerfile
+node_modules
