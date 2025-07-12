@@ -1,15 +1,18 @@
 {
   "name": "live-draft-board",
   "version": "1.0.0",
-  "scripts": {
-    "build": "react-scripts build",
-    "start": "node server.js",
-    "dev": "react-scripts start"
+  "type": "module",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.14.0"
   },
   "dependencies": {
     "express": "^4.18.2"
   },
-  "devDependencies": {
-    "react-scripts": "5.0.1"
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "generate-teams": "node generate-team-pages.js",
+    "rename-logos": "node rename-logos.js"
   }
 }
