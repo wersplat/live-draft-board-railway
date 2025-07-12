@@ -1,5 +1,4 @@
 export { DraftContext } from './context';
-// Import useDraft from the hooks directory
-export { useDraft } from '../../hooks/useDraft';
-// Re-export types for convenience
+export { DraftProvider } from './DraftProvider';
+export { useDraft } from './useDraft';
 export type { DraftContextType } from './types';
