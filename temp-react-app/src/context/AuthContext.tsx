@@ -1,19 +1,21 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import type { ReactNode, FC } from 'react';
 import type { SupabaseClient, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 
-type AuthContextType = {
+// Move types to a separate file to avoid Fast Refresh issues
+interface AuthContextType {
   user: User | null;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   loading: boolean;
   supabase: SupabaseClient;
-};
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+// Export the provider as a named constant to help with Fast Refresh
+const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,12 +57,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase,
   };
 
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => value, [value]);
+
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={contextValue}>
       {!loading && children}
     </AuthContext.Provider>
   );
-}
+};
+
+export { AuthProvider };
 
 export function useAuth() {
   const context = useContext(AuthContext);

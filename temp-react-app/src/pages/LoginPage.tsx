@@ -24,9 +24,10 @@ const LoginPage = () => {
       await signIn(email, password);
       toast.success('Successfully logged in!');
       navigate('/');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Login error:', error);
-      toast.error(error.message || 'Failed to sign in');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to sign in';
+      toast.error(errorMessage);
     } finally {
       setIsLoading(false);
     }
