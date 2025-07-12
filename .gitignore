@@ -2,3 +2,4 @@
 logos/.DS_Store
 .env
 .env.template
+dockerfile
