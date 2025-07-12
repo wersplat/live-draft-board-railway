@@ -1,0 +1,26 @@
+{
+    "eventTitle": "UPA Summer Championship",
+    "numTeams": 16,
+    "numRounds": 6,
+    "pickTimeSeconds": 120,
+    "teams": [
+      "Team-A", "Team-B", "Team-C", "Team-D", "Team-E", "Team-F", "Team-G", "Team-H",
+      "Team-I", "Team-J", "Team-K", "Team-L", "Team-M", "Team-N", "Team-O", "Team-P"
+    ],
+    "prizePool": 15000,
+    "draftDate": "July 20, 2025",
+    "draftType": "snake",
+    "customDraftOrder": null,
+    "picksPerTeam": 6,
+    "autoSkipOnTimeout": true,
+    "currency": "USD",
+    "timezone": "UTC",
+    "rulesUrl": "https://example.com/rules",
+    "playerPoolFile": "players.json",
+    "themeColor": "#007BFF",
+    "prizeBreakdown": [
+      {"place": 1, "amount": 8000},
+      {"place": 2, "amount": 4500},
+      {"place": 3, "amount": 2500}
+    ]
+  }

@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>All Teams - UPA Summer Championship</title>
+  <style>body { font-family: Arial, sans-serif; padding: 20px; } ul { list-style: none; }</style>
+</head>
+<body>
+  <h1>All Draft Teams - UPA Summer Championship</h1>
+  <p><a href="https://example.com/rules">Event Rules</a></p>
+  <h3>Prize Breakdown</h3><ul><li>1st Place: USD 8000</li><li>2st Place: USD 4500</li><li>3st Place: USD 2500</li></ul>
+  
+      <input id="search" type="text" placeholder="Search teams..." aria-label="Search teams">
+      <script>
+        document.getElementById('search').addEventListener('input', e => {
+          const term = e.target.value.toLowerCase();
+          document.querySelectorAll('#team-list li').forEach(li => {
+            li.style.display = li.textContent.toLowerCase().includes(term) ? 'list-item' : 'none';
+          });
+        });
+      </script>
+    
+  <ul id="team-list">
+    
+  </ul>
+</body>
+</html>
+    

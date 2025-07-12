@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bodega Cats – Draft Picks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 2rem;
+    }
+    h1 {
+      color: #B6094B;
+      font-size: 2rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 2rem;
+      font-size: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .logo {
+      height: 60px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <img class="logo" src="../logos/bodega-cats.png" onerror="this.src='../logos/placeholder.png'" alt="Bodega Cats Logo">
+  <h1>Bodega Cats – Draft Picks</h1>
+  <ul id="pick-list">Loading...</ul>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const supabase = createClient(
+      'https://suqhwtwfvpcyvcbnycsa.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1cWh3dHdmdnBjeXZjYm55Y3NhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzk2MzAsImV4cCI6MjA2NzAxNTYzMH0.ROawOqve1AezL2Asi0MqcWy4GbISImG_CNbaXxNg2lo'
+    );
+
+    const teamSlug = 'bodega-cats';
+
+    const { data, error } = await supabase
+      .from('draft_picks')
+      .select('*')
+      .eq('team_slug', teamSlug)
+      .order('pick');
+
+    const ul = document.getElementById('pick-list');
+    ul.innerHTML = '';
+
+    if (error) {
+      ul.innerHTML = '<li>Error loading picks.</li>';
+      console.error(error);
+    } else if (data.length === 0) {
+      ul.innerHTML = '<li>No picks yet.</li>';
+    } else {
+      data.forEach(pick => {
+        const li = document.createElement('li');
+        li.textContent = `Round ${pick.round}, Pick #${pick.pick}: ${pick.player}`;
+        ul.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

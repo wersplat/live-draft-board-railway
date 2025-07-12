@@ -1,0 +1,15 @@
+{
+  "name": "live-draft-board",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "node server.js",
+    "dev": "react-scripts start"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1"
+  }
+}

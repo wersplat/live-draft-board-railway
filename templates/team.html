@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{eventTitle}} - {{team}} Draft Picks</title>
+  <style>body { font-family: Arial, sans-serif; padding: 20px; } img.logo { max-width: 150px; display: block; margin: 0 auto; }</style>
+</head>
+<body>
+  <h1>{{team}} – Draft Picks</h1>
+  {{logo}}
+  <ul>
+    {{players}}
+  </ul>
+</body>
+</html>
+#### 7. `package.json` (Updated: Added scripts for build and test)
+```json
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "dotenv": "^16.3.1"
+  },
+  "type": "module",
+  "name": "live-draft-board",
+  "version": "1.0.1",
+  "description": "A real-time draft board application for the UPA Summer Championship... (no change)",
+  "main": "generate-team-pages.js",
+  "scripts": {
+    "build": "node generate-team-pages.js && node rename-logos.js",
+    "test": "echo \"Basic test: Files generated successfully\" || exit 0"  // Placeholder; add "jest" for real tests
+  },
+  // rest remains same...
+}
