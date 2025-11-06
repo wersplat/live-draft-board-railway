@@ -1,86 +1,121 @@
-import { useDraft } from '../context/DraftContext/useDraft';
-import { useAuth } from '../context/AuthContext';
-import DraftBoard from '../components/DraftBoard';
-import type { Player } from '../services/supabase';
+import { Link } from 'react-router-dom';
+import Card from '../components/Card';
 
 const HomePage = () => {
-  const { user } = useAuth();
-  const { 
-    teams, 
-    players,
-    currentPick, 
-    isLoading, 
-    togglePause,
-    resetDraft,
-    isPaused,
-    timeLeft,
-    selectPlayer
-  } = useDraft();
-
-  const currentTeam = teams[(currentPick - 1) % teams.length];
-  const isAdmin = user?.email?.endsWith('@admin.com') ?? false;
-
-  const handleSelectPlayer = (player: Player) => {
-    selectPlayer(player.id);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-8">
-      <DraftBoard 
-        currentTeam={currentTeam}
-        currentPick={currentPick}
-        timeLeft={timeLeft}
-        isPaused={isPaused}
-        onTogglePause={togglePause}
-        onResetDraft={resetDraft}
-        isAdmin={isAdmin}
-      />
-      
-      {/* Available Players */}
-      <div className="bg-white shadow rounded-lg overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="text-lg font-medium text-gray-900">Available Players</h3>
-        </div>
-        <div className="overflow-y-auto" style={{ maxHeight: '600px' }}>
-          {players.length === 0 ? (
-            <div className="p-6 text-center text-gray-500">
-              No players available
-            </div>
-          ) : (
-            <ul className="divide-y divide-gray-200">
-              {players.map((player: Player) => (
-                <li key={player.id} className="px-6 py-4 hover:bg-gray-50">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{player.name}</p>
-                      <p className="text-sm text-gray-500">{player.position} • {player.team}</p>
-                    </div>
-                    <button
-                      onClick={() => handleSelectPlayer(player)}
-                      className={`inline-flex items-center px-3 py-1.5 border text-xs font-medium rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                        isPaused 
-                          ? 'bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed'
-                          : 'bg-indigo-600 text-white border-transparent hover:bg-indigo-700 focus:ring-indigo-500'
-                      }`}
-                      disabled={isPaused}
-                    >
-                      Draft
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+      <div className="text-center">
+        <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Welcome to Legends Basketball Association
+        </h1>
+        <p className="text-xl text-gray-600 dark:text-neutral-300 mb-8">
+          The premier competitive basketball league
+        </p>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card>
+          <Link to="/rankings" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">🏀</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Player Rankings
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                View all players and their profiles
+              </p>
+            </div>
+          </Link>
+        </Card>
+
+        <Card>
+          <Link to="/matches" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">📊</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Recent Matches
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                Latest game results and scores
+              </p>
+            </div>
+          </Link>
+        </Card>
+
+        <Card>
+          <Link to="/standings" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">🏆</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Standings
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                Current league standings
+              </p>
+            </div>
+          </Link>
+        </Card>
+
+        <Card>
+          <Link to="/statistics" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">📈</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Statistics
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                League-wide stats and metrics
+              </p>
+            </div>
+          </Link>
+        </Card>
+
+        <Card>
+          <Link to="/draft-pool" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">👥</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Draft Pool
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                Available players for draft
+              </p>
+            </div>
+          </Link>
+        </Card>
+
+        <Card>
+          <Link to="/draft" className="block">
+            <div className="text-center">
+              <div className="text-4xl mb-4">⚡</div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Live Draft
+              </h2>
+              <p className="text-gray-600 dark:text-neutral-300">
+                Follow the draft in real-time
+              </p>
+            </div>
+          </Link>
+        </Card>
+      </div>
+
+      <Card>
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+            About Legends Basketball Association
+          </h2>
+          <p className="text-gray-700 dark:text-neutral-300 mb-4">
+            The Legends Basketball Association is dedicated to providing the highest level of competitive basketball 
+            while fostering sportsmanship, teamwork, and excellence both on and off the court.
+          </p>
+          <Link
+            to="/about"
+            className="inline-block px-6 py-2 bg-legends-purple-600 text-white rounded-lg hover:bg-legends-purple-700 transition-colors"
+          >
+            Learn More
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 };

@@ -1,0 +1,76 @@
+/* Legends Basketball Association Theme Variables */
+:root {
+  --legends-purple: #9333EA;
+  --legends-purple-dark: #7E22CE;
+  --legends-red: #DC2626;
+  --legends-red-dark: #B91C1C;
+  --legends-blue: #2563EB;
+  --legends-blue-dark: #1D4ED8;
+}
+
+.dark {
+  --legends-purple: #A855F7;
+  --legends-purple-dark: #9333EA;
+  --legends-red: #EF4444;
+  --legends-red-dark: #DC2626;
+  --legends-blue: #3B82F6;
+  --legends-blue-dark: #2563EB;
+}
+
+/* Card styles matching proam-rankings */
+@layer components {
+  .card-border {
+    @apply border border-gray-300 dark:border-white/20 hover:border-legends-purple-500/50 dark:hover:border-legends-purple-500/50 transition;
+  }
+  
+  .card-bg {
+    @apply bg-white/90 dark:bg-legends-blue-900/50 backdrop-blur-sm;
+  }
+
+  /* Legends Brand Gradients */
+  .legends-gradient {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(37, 99, 235, 0.1) 100%);
+  }
+
+  .dark .legends-gradient {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(37, 99, 235, 0.1) 100%);
+  }
+
+  .legends-accent-gradient {
+    background: linear-gradient(135deg, #9333EA 0%, #DC2626 50%, #2563EB 100%);
+  }
+
+  .neon-edge-purple {
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.3), 0 0 20px rgba(147, 51, 234, 0.2);
+  }
+
+  .neon-edge-blue {
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.3), 0 0 20px rgba(37, 99, 235, 0.2);
+  }
+}
+
+@layer utilities {
+  /* Focus indicators for keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid #9333EA;
+    outline-offset: 2px;
+  }
+
+  .dark *:focus-visible {
+    outline: 2px solid #A855F7;
+    outline-offset: 2px;
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+

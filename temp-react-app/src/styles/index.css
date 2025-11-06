@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Custom styles */
+body {
+  @apply bg-white dark:bg-legends-blue-900 text-gray-900 dark:text-white;
+}
+
+
+
+

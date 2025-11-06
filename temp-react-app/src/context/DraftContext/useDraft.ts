@@ -29,6 +29,8 @@ export const useDraft = (): DraftContextType => {
   const { data: draftPicks = [], isLoading: isLoadingDraftPicks } = useQuery<DraftPick[]>({
     queryKey: ['draftPicks'],
     queryFn: draftPicksApi.getAll,
+    retry: false, // Don't retry if table doesn't exist
+    refetchOnWindowFocus: false,
   });
 
   // Skip the current pick
