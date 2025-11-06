@@ -1,0 +1,8 @@
+var R=require("../chunks/ssr/[turbopack]_runtime.js")("server/pages/_error.js")
+R.c("server/chunks/ssr/decf0__pnpm_7836a93e._.js")
+R.c("server/chunks/ssr/[externals]_next_dist_shared_lib_no-fallback-error_external_59b92b38.js")
+R.c("server/chunks/ssr/decf0__pnpm_0bced173._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__e6a4d965._.js")
+R.c("server/chunks/ssr/25935_next_b0c33151._.js")
+R.m("[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)")
+module.exports=R.m("[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/dist/esm/build/templates/pages.js { INNER_PAGE => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/error.js [ssr] (ecmascript)\", INNER_DOCUMENT => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/document.js [ssr] (ecmascript)\", INNER_APP => \"[project]/temp-react-app/node_modules/.pnpm/next@16.0.1_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/app.js [ssr] (ecmascript)\" } [ssr] (ecmascript)").exports

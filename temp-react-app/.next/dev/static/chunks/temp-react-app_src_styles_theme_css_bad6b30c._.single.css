@@ -1,0 +1,206 @@
+/* [project]/temp-react-app/src/styles/theme.css [app-client] (css) */
+@layer properties {
+  @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
+    *, :before, :after, ::backdrop {
+      --tw-border-style: solid;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+    }
+  }
+}
+
+:root {
+  --legends-purple: #9333ea;
+  --legends-purple-dark: #7e22ce;
+  --legends-red: #dc2626;
+  --legends-red-dark: #b91c1c;
+  --legends-blue: #2563eb;
+  --legends-blue-dark: #1d4ed8;
+}
+
+.dark {
+  --legends-purple: #a855f7;
+  --legends-purple-dark: #9333ea;
+  --legends-red: #ef4444;
+  --legends-red-dark: #dc2626;
+  --legends-blue: #3b82f6;
+  --legends-blue-dark: #2563eb;
+}
+
+@layer components {
+  .card-border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-gray-300, #d1d5dc);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(.4, 0, .2, 1)));
+    transition-duration: var(--tw-duration, var(--default-transition-duration, .15s));
+  }
+
+  @supports (color: lab(0% 0 0)) {
+    .card-border {
+      border-color: var(--color-gray-300, lab(85.1236% -.612259 -3.7138));
+    }
+  }
+
+  @media (hover: hover) {
+    .card-border:hover {
+      border-color: #9333ea80;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .card-border:hover {
+        border-color: color-mix(in oklab, var(--color-legends-purple-500, #9333ea) 50%, transparent);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .card-border {
+      border-color: #fff3;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .card-border {
+        border-color: color-mix(in oklab, var(--color-white, #fff) 20%, transparent);
+      }
+    }
+
+    @media (hover: hover) {
+      .card-border:hover {
+        border-color: #9333ea80;
+      }
+
+      @supports (color: color-mix(in lab, red, red)) {
+        .card-border:hover {
+          border-color: color-mix(in oklab, var(--color-legends-purple-500, #9333ea) 50%, transparent);
+        }
+      }
+    }
+  }
+
+  .card-bg {
+    background-color: #ffffffe6;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .card-bg {
+      background-color: color-mix(in oklab, var(--color-white, #fff) 90%, transparent);
+    }
+  }
+
+  .card-bg {
+    --tw-backdrop-blur: blur(var(--blur-sm, 8px));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+    backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .card-bg {
+      background-color: #1e3a8a80;
+    }
+
+    @supports (color: color-mix(in lab, red, red)) {
+      .card-bg {
+        background-color: color-mix(in oklab, var(--color-legends-blue-900, #1e3a8a) 50%, transparent);
+      }
+    }
+  }
+
+  .legends-gradient, .dark .legends-gradient {
+    background: linear-gradient(135deg, #9333ea1a 0%, #ffffff0d 50%, #2563eb1a 100%);
+  }
+
+  .legends-accent-gradient {
+    background: linear-gradient(135deg, #9333ea 0%, #dc2626 50%, #2563eb 100%);
+  }
+
+  .neon-edge-purple {
+    box-shadow: 0 0 10px #9333ea4d, 0 0 20px #9333ea33;
+  }
+
+  .neon-edge-blue {
+    box-shadow: 0 0 10px #2563eb4d, 0 0 20px #2563eb33;
+  }
+}
+
+@layer utilities {
+  :focus-visible {
+    outline-offset: 2px;
+    outline: 2px solid #9333ea;
+  }
+
+  .dark :focus-visible {
+    outline-offset: 2px;
+    outline: 2px solid #a855f7;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, :before, :after {
+      scroll-behavior: auto !important;
+      transition-duration: .01ms !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+/*# sourceMappingURL=temp-react-app_src_styles_theme_css_bad6b30c._.single.css.map*/

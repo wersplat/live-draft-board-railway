@@ -1,3 +1,5 @@
+@reference "./index.css";
+
 /* Legends Basketball Association Theme Variables */
 :root {
   --legends-purple: #9333EA;

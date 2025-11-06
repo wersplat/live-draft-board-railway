@@ -1,0 +1,11 @@
+{
+  "/draft-pool/page": "app/draft-pool/page.js",
+  "/draft/page": "app/draft/page.js",
+  "/login/page": "app/login/page.js",
+  "/matches/page": "app/matches/page.js",
+  "/media/page": "app/media/page.js",
+  "/page": "app/page.js",
+  "/rankings/page": "app/rankings/page.js",
+  "/standings/page": "app/standings/page.js",
+  "/statistics/page": "app/statistics/page.js"
+}

@@ -1,5 +1,8 @@
+'use client'
+
 import type { ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 
@@ -9,7 +12,7 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   const { user, signOut } = useAuth();
-  const location = useLocation();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -26,9 +29,9 @@ export default function Layout({ children }: LayoutProps) {
 
   const isActive = (path: string) => {
     if (path === '/') {
-      return location.pathname === '/';
+      return pathname === '/';
     }
-    return location.pathname.startsWith(path);
+    return pathname.startsWith(path);
   };
 
   return (
@@ -37,7 +40,7 @@ export default function Layout({ children }: LayoutProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             {/* Logo/Title */}
-            <Link to="/" className="flex items-center gap-2" aria-label="Legends Basketball Association Home">
+            <Link href="/" className="flex items-center gap-2" aria-label="Legends Basketball Association Home">
               <span className="text-2xl font-bold bg-gradient-to-r from-legends-purple-600 via-legends-red-600 to-legends-blue-600 dark:from-legends-purple-400 dark:via-legends-red-400 dark:to-legends-blue-400 bg-clip-text text-transparent">
                 Legends Basketball Association
               </span>
@@ -49,7 +52,7 @@ export default function Layout({ children }: LayoutProps) {
                 {navItems.map((item) => (
                   <li key={item.path} role="none">
                     <Link
-                      to={item.path}
+                      href={item.path}
                       className={`relative px-2 py-1 transition focus:outline-none focus:ring-2 focus:ring-legends-purple-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-legends-blue-900 rounded ${
                         isActive(item.path)
                           ? 'text-legends-purple-600 dark:text-legends-purple-400 font-semibold'
@@ -82,7 +85,7 @@ export default function Layout({ children }: LayoutProps) {
                   </>
                 ) : (
                   <Link
-                    to="/login"
+                    href="/login"
                     className="px-3 py-1 text-sm text-legends-purple-600 dark:text-legends-purple-400 hover:text-legends-purple-800 dark:hover:text-legends-purple-300 transition-colors"
                   >
                     Sign In
@@ -99,7 +102,7 @@ export default function Layout({ children }: LayoutProps) {
                 </span>
               ) : (
                 <Link
-                  to="/login"
+                  href="/login"
                   className="px-3 py-1 text-sm text-legends-purple-600 dark:text-legends-purple-400 mr-2"
                 >
                   Sign In
@@ -127,7 +130,7 @@ export default function Layout({ children }: LayoutProps) {
                 {navItems.map((item) => (
                   <li key={item.path} role="none">
                     <Link
-                      to={item.path}
+                      href={item.path}
                       onClick={() => setMobileMenuOpen(false)}
                       aria-label={`Navigate to ${item.label} page`}
                       className={`block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-legends-blue-800 focus:outline-none focus:ring-2 focus:ring-legends-purple-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-legends-blue-900 ${
