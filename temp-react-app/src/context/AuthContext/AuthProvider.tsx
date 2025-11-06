@@ -1,5 +1,7 @@
+'use client'
+
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter, usePathname } from 'next/navigation';
 import { AuthContext } from './context';
 import { supabase } from '../../lib/supabase';
 import type { User } from '@supabase/supabase-js';
@@ -11,7 +13,8 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     // Check active sessions and set the user
@@ -34,15 +37,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setUser(session?.user ?? null);
       
       // Redirect to home after successful sign in
-      if (event === 'SIGNED_IN' && window.location.pathname === '/login') {
-        navigate('/');
+      if (event === 'SIGNED_IN' && pathname === '/login') {
+        router.push('/');
       }
     });
 
     return () => {
       authListener?.subscription?.unsubscribe();
     };
-  }, [navigate]);
+  }, [router, pathname]);
 
   const signIn = useCallback(async (email: string, password: string) => {
     try {
@@ -58,12 +61,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      navigate('/login');
+      router.push('/login');
     } catch (error) {
       console.error('Error signing out:', error);
       throw error;
     }
-  }, [navigate]);
+  }, [router]);
 
   const value = useMemo(() => ({
     user,

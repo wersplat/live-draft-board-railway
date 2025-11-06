@@ -1,3 +1,5 @@
+'use client'
+
 import { useDraft } from '../context/DraftContext/useDraft';
 import { formatTime } from '../utils/formatTime';
 import type { Team, DraftPick } from '../services/supabase';

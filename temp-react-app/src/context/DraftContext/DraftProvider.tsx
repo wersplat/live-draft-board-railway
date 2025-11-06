@@ -1,3 +1,5 @@
+'use client'
+
 import { type ReactNode, useMemo } from 'react';
 import { DraftContext } from './context';
 import { useDraft } from './useDraft';
